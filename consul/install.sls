@@ -39,4 +39,5 @@ consul_data_directory:
 configure_consul_service:
   file.managed:
     - name: {{ consul_service.destination_path }}
-    - source: salt://consul/files/{{ consul_service.source_path }}
+    - source: salt://consul/templates/{{ consul_service.source_path }}
+    - template: jinja
