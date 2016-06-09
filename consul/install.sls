@@ -21,6 +21,11 @@ install_consul_bin:
     - require:
       - module: unzip_package
 
+permission_consul_bin:
+  file.managed:
+    - name: /usr/bin/consul
+    - mode: 0755
+
 consul_config_directory:
   file.directory:
     - name: /etc/consul.d
