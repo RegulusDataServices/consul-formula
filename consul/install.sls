@@ -35,3 +35,14 @@ consul_data_directory:
   file.directory:
     - name: {{ consul.data_dir }}
     - makedirs: True
+
+consul_config_directory:
+  file.directory:
+    - name: {{ consul.config_dir }}
+    - makedirs: True
+
+configure_consul_service:
+  file.managed:
+    - name: {{ consul_service.destination_path }}
+    - source: salt://consul/templates/{{ consul_service.source_path }}
+    - template: jinja

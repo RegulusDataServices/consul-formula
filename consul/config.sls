@@ -1,15 +1,7 @@
 {% from "consul/map.jinja" import consul with context %}
 
-consul_config_directory:
-  file.directory:
-    - name: {{ consul.config_dir }}
-    - makedirs: True
-
-configure_consul_service:
-  file.managed:
-    - name: {{ consul_service.destination_path }}
-    - source: salt://consul/templates/{{ consul_service.source_path }}
-    - template: jinja
+include:
+  - .install
 
 {% for name, contents in salt.pillar.get('consul:extra_configs', {}) %}
 write_{{ name }}_config:
