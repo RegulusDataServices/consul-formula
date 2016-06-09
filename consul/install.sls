@@ -1,4 +1,4 @@
-{% from "consul/map.jinja" import consul with context %}
+{% from "consul/map.jinja" import consul, consul_service with context %}
 
 download_package:
   file.managed:
@@ -16,8 +16,8 @@ unzip_package:
 
 install_consul_bin:
   file.copy:
-    - name: /tmp/consul/consul
-    - dest: /usr/bin/consul
+    - name: /usr/bin/consul
+    - source: /tmp/consul/consul
     - require:
       - module: unzip_package
 
