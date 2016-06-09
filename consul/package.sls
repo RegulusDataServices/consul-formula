@@ -3,4 +3,11 @@
 install_consul:
   file.managed:
     - name: /tmp/consul.zip
-    - source: https://releases.hashicorp.com/consul/0.6.4/consul_0.6.4_linux_amd64.zip
+    - source: {{ consul.consul_zip }}
+
+unzip_consul:
+  module.run:
+    - name: unzip
+    - kwargs:
+      - zip_file: /tmp/consul.zip
+      - dest: /tmp/consul
