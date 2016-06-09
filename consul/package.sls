@@ -13,3 +13,10 @@ unzip_package:
     - dest: /tmp/consul
     - require:
       - file: download_package
+
+install_consul_bin:
+  file.copy:
+    - name: /tmp/consul/consul
+    - dest: /usr/bin/consul
+    - require:
+      - module: unzip_package
