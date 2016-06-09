@@ -10,7 +10,7 @@
     },
     'RedHat': {
     },
-}, grain='os_family', merge=salt['pillar.get']('consul:lookup'), base='default') %}
+}, grain='os_family', merge=salt['pillar.get']('consul:overrides'), base='default') %}
 
 {% set consul_service = salt.grains.filter_by({
     'systemd': {
