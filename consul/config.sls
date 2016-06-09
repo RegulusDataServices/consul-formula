@@ -3,12 +3,12 @@
 include:
   - .install
 
-{% for name, contents in salt.pillar.get('consul:extra_configs', {}) %}
+{% for name, contents in salt.pillar.get('consul:extra_configs', {}).items() %}
 write_{{ name }}_config:
   file.managed:
     - name: {{ consul.config_dir }}/{{ name }}.json
     - contents: |
-      {{ contents|json }}
+        {{ contents|json }}
     - require:
       - file: consul_config_directory
     - require_in:
