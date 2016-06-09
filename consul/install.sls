@@ -20,3 +20,13 @@ install_consul_bin:
     - dest: /usr/bin/consul
     - require:
       - module: unzip_package
+
+consul_config_directory:
+  file.directory:
+    - name: /etc/consul.d
+    - makedirs: True
+
+configure_consul_service:
+  file.managed:
+    - name: {{ consul_service.destination_path }}
+    - source: salt://consul/files/{{ consul_service.source_path }}
