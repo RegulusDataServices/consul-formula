@@ -28,13 +28,23 @@ permission_consul_bin:
 
 consul_config_directory:
   file.directory:
-    - name: /etc/consul.d
+    - name: {{ consul.config_dir }}
     - makedirs: True
 
 consul_data_directory:
   file.directory:
     - name: {{ consul.data_dir }}
     - makedirs: True
+
+{% for name, contents in salt.pillar.get('consul:extra_configs', {}) %}
+write_{{ name }}_config:
+  file.managed:
+    - name: {{ consul.config_dir }}/{{ name }}.json
+    - contents: |
+      {{ contents|json }}
+    - require:
+      - file: consul_config_directory
+{% endfor %}
 
 configure_consul_service:
   file.managed:
