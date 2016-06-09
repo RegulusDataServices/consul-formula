@@ -31,6 +31,11 @@ consul_config_directory:
     - name: /etc/consul.d
     - makedirs: True
 
+consul_data_directory:
+  file.directory:
+    - name: {{ consul.data_dir }}
+    - makedirs: True
+
 configure_consul_service:
   file.managed:
     - name: {{ consul_service.destination_path }}
