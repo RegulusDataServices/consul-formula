@@ -8,5 +8,6 @@ test_consul_installed:
 {% for dir in [consul.data_dir, consul.config_dir] %}
 test_{{ dir }}_dir_exists:
   testinfra.file:
+    - name: {{ dir }}
     - is_directory: True
 {% endfor %}
