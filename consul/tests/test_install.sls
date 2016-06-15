@@ -1,4 +1,4 @@
-{% from "consul/map.jinja" import consul with context %}
+{% from "consul/map.jinja" import consul, consul_service with context %}
 
 test_consul_installed:
   testinfra.file:
@@ -8,5 +8,5 @@ test_consul_installed:
 {% for dir in [consul.data_dir, consul.config_dir] %}
 test_{{ dir }}_dir_exists:
   testinfra.file:
-    is_directory: True
+    - is_directory: True
 {% endfor %}
